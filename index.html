@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"
+    integrity="sha512-zJYu9ICC+mWF3+dJ4QC34N9RA0OVS1XtPbnf6oXlvGrLGNB8egsEzu/5wgG90I61hOOKvcywoLzwNmPqGAdATA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" multiple>
+  <button>Enviar</button>
+  <script>
+    const input = document.querySelector("input");
+    const button = document.querySelector("button");
+
+    button.addEventListener("click", handleClick);
+
+    const options = {
+      headers: {
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojg0L3dwX3JhbmVrIiwiaWF0IjoxNjcwODcyOTA4LCJuYmYiOjE2NzA4NzI5MDgsImV4cCI6MTY3MDk1OTMwOCwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiNCJ9fX0.gh68f0Nt0qRAGrnrWgCYCdo7QJzjd5cWvh7NnZVGeQg"
+      }
+    }
+
+
+    function handleClick() {
+      const files = input.files;
+      const form = new FormData();
+
+      for (let i = 0; i < files.length; i++) {
+        form.append(files[i].name, files[i]);
+      }
+
+      form.append("nome", "Notebook")
+      form.append("descricao", "descricao do notebook")
+      form.append("preco", "855966")
+
+      axios.post("http://localhost:84/wp_ranek/wp-json/api/produto", form, options)
+
+    }
+  </script>
+</body>
+
+</html>
